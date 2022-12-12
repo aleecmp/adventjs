@@ -1,14 +1,38 @@
-import { test, expect } from '@jest/globals';
 import { wrapping } from './main';
 
-test('wrapping function wraps gifts in wrapping paper', () => {
-  const gifts = ['cat', 'game', 'socks'];
+describe('Test wrapping function for accurately wrapping gifts', () => {
+  it('should require gifts to be an array', () => {
+    const gifts = 'book';
 
-  const wrapped = wrapping(gifts);
+    expect(Array.isArray(gifts)).toBe(false);
+  });
 
-  expect(wrapped).toEqual([
-    '*****\n*cat*\n*****',
-    '******\n*game*\n******',
-    '*******\n*socks*\n*******',
-  ]);
+  it('should return an array of wrapped gifts', () => {
+    const gifts = ['cat', 'game', 'socks'];
+    const expected = [
+      '*****\n*cat*\n*****',
+      '******\n*game*\n******',
+      '*******\n*socks*\n*******',
+    ];
+
+    expect(wrapping(gifts)).toEqual(expected);
+  });
+
+  it('should wrap a single gift correctly', () => {
+    const gifts = ['midu'];
+    const expected = ['******\n*midu*\n******'];
+
+    expect(wrapping(gifts)).toEqual(expected);
+  });
+
+  it('should wrap a single-letter gift correctly', () => {
+    const gifts = ['a'];
+    const expected = ['***\n*a*\n***'];
+
+    expect(wrapping(gifts)).toEqual(expected);
+  });
+
+  it('should return an empty array for an empty input', () => {
+    expect(wrapping([])).toEqual([]);
+  });
 });
