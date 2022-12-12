@@ -1,4 +1,4 @@
-function wrapping(gifts: string[]) {
+export function wrapping(gifts: string[]) {
   return gifts.map((gift: string) => {
     const giftSize: number = gift.length + 2;
 
